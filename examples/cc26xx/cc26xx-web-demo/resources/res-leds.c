@@ -58,6 +58,7 @@ res_post_put_handler(void *request, void *response, uint8_t *buffer,
   if((len = REST.get_query_variable(request, "color", &color))) {
     if(strncmp(color, "r", len) == 0) {
       led = LEDS_RED;
+#if !(BOARD_MOMOTE001)
     } else if(strncmp(color, "g", len) == 0) {
       led = LEDS_GREEN;
 #if BOARD_SMARTRF06EB
@@ -65,6 +66,7 @@ res_post_put_handler(void *request, void *response, uint8_t *buffer,
       led = LEDS_YELLOW;
     } else if(strncmp(color, "o", len) == 0) {
       led = LEDS_ORANGE;
+#endif
 #endif
     } else {
       success = 0;
@@ -98,6 +100,8 @@ res_post_put_handler(void *request, void *response, uint8_t *buffer,
 #define RESOURCE_PARAMS "r|g"
 #elif BOARD_SMARTRF06EB
 #define RESOURCE_PARAMS "r|g|y|o"
+#elif BOARD_MOMOTE001
+#define RESOURCE_PARAMS "r"
 #endif
 
 RESOURCE(res_leds,

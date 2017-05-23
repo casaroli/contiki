@@ -98,7 +98,11 @@
 /*---------------------------------------------------------------------------*/
 /* User configuration */
 /* Take a sensor reading on button press */
+#if BOARD_MOMOTE001
+#define CC26XX_WEB_DEMO_SENSOR_READING_TRIGGER &button_right_sensor
+#else
 #define CC26XX_WEB_DEMO_SENSOR_READING_TRIGGER &button_left_sensor
+#endif
 
 /* Payload length of ICMPv6 echo requests used to measure RSSI with def rt */
 #define CC26XX_WEB_DEMO_ECHO_REQ_PAYLOAD_LEN   20
@@ -108,6 +112,8 @@
 #define CC26XX_WEB_DEMO_MQTT_PUBLISH_TRIGGER &reed_relay_sensor
 #elif BOARD_LAUNCHPAD
 #define CC26XX_WEB_DEMO_MQTT_PUBLISH_TRIGGER &button_left_sensor
+#elif BOARD_MOMOTE001
+#define CC26XX_WEB_DEMO_MQTT_PUBLISH_TRIGGER &button_right_sensor
 #else
 #define CC26XX_WEB_DEMO_MQTT_PUBLISH_TRIGGER &button_down_sensor
 #endif
